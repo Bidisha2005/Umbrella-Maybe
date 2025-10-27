@@ -15,6 +15,8 @@
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/)
 An AI-powered web application that predicts rainfall using meteorological data and a trained Machine Learning model.
 
+https://github.com/Bidisha2005/Umbrella-Maybe/blob/main/static/home.png?raw=true
+
 ## ✨ Features
 
 - 🎯 **Accurate Prediction**: Utilizes Random Forest and XGBoost for high-accuracy rainfall prediction.
@@ -90,3 +92,4 @@ Computer Science Student | ML & Web Developer | Passionate about AI-powered appl
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
+

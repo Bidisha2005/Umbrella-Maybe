@@ -15,6 +15,8 @@
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/)
 An AI-powered web application that predicts rainfall using meteorological data and a trained Machine Learning model.
 
+<img width="2833" height="1523" alt="image" src="https://github.com/Bidisha2005/Umbrella-Maybe/blob/main/static/home.png?raw=true" />
+
 ## ✨ Features
 
 - 🎯 **Accurate Prediction**: Utilizes Random Forest and XGBoost for high-accuracy rainfall prediction.
@@ -36,6 +38,12 @@ The Machine Learning model was trained on meteorological datasets using:
 The final model is stored as `rainfall_model.pkl` and is integrated into the Flask backend for real-time predictions.
 
 ---
+<img width="2833" height="1523" alt="image" src="https://github.com/Bidisha2005/Umbrella-Maybe/blob/main/static/prediction.png?raw=true" />
+
+<img width="2833" height="1523" alt="image" src="https://github.com/Bidisha2005/Umbrella-Maybe/blob/main/static/sunny.png?raw=true" />
+
+<img width="2833" height="1523" alt="image" src="https://github.com/Bidisha2005/Umbrella-Maybe/blob/main/static/rainy.png?raw=true" />
+
 
 ## 🚀 Quick Start
 

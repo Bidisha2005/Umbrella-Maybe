@@ -13,6 +13,8 @@
 [![Render](https://img.shields.io/badge/Render-46E3B7?style=flat-square&logo=render&logoColor=white)](https://render.com/)
 [![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)](https://git-scm.com/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/)
+
+
 An AI-powered web application that predicts rainfall using meteorological data and a trained Machine Learning model.
 
 <img width="2833" height="1523" alt="image" src="https://github.com/Bidisha2005/Umbrella-Maybe/blob/main/static/home.png?raw=true" />

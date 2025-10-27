@@ -54,11 +54,11 @@ From fetching your live geolocation weather to generating rainfall predictions w
 
 | Category | Technologies |
 |-----------|---------------|
-| **Frontend** | HTML5, CSS3, JavaScript (ES6+), Chart.js, Tailwind / Bootstrap |
-| **Backend** | Flask / Node.js |
+| **Frontend** | HTML5, CSS3, JavaScript (ES6+), Chart.js, |
+| **Backend** | Flask  |
 | **Machine Learning** | Python, Scikit-learn, Pandas, NumPy |
-| **APIs Used** | OpenWeather API, Google Gemini API |
-| **Deployment** | Render / Vercel / Heroku |
+| **APIs Used** | Google Gemini API |
+| **Deployment** | Render|
 | **Version Control** | Git & GitHub |
 
 ---
@@ -68,7 +68,6 @@ From fetching your live geolocation weather to generating rainfall predictions w
 ## ⚙️ Installation & Setup
 
 1️⃣ Clone the repository
-```bash
 git clone https://github.com/<your-username>/rainfall-predictor.git
 cd rainfall-predictor
 
@@ -78,5 +77,44 @@ pip install -r requirements.txt
 3️⃣ Set up environment variables
 Create a .env file in the root directory:
 
+4️⃣ Run the Flask app
+python app.py
 
+5️⃣ Open in your browser
+http://127.0.0.1:5000
+
+---
+🔮 Model Details
+
+The Machine Learning model was trained on meteorological datasets using:
+-Features: Humidity, Temperature, Pressure,Visibility,Weather Type
+-Label: Rainfall (binary classification)
+-Algorithms: Random Forest, XGBoost
+-Best Accuracy: ~92%
+-Metrics Used: Accuracy, F1 Score, ROC Curve
+Model stored as rainfall_model.pkl and integrated into Flask backend.
+
+---
+💡 Future Enhancements
+-🌡️ Add more predictive parameters (wind speed, cloud cover)
+-📱 Convert to Progressive Web App (PWA)
+-🌐 Add multilingual weather chatbot support
+-🔔 Enable weather alerts via email/SMS
+-🌈 Integrate AI-based weather visualizations using Gemini Vision
+
+---
+🧑‍💻 Developer
+
+👤 Bidisha Kundu
+Computer Science Student | ML & Web Developer | Passionate about AI-powered applications
+
+📧 Email:kbidisha.2005@gmail.com
+💼 LinkedIn:https://www.linkedin.com/in/bidisha-kundu-41706428b/
+
+---
+
+⭐ Support
+
+If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
+Your support motivates me to keep building awesome AI-powered web apps 🚀
 

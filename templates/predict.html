@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rainfall Prediction</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -15,21 +17,121 @@
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #fff;
             min-height: 100vh;
-            padding: 40px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 1s ease-in;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Weather Background Elements */
+        .weather-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .sun-side {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffd166, #ff9e00);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            opacity: 0.15;
+        }
+
+        .rain-side {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #118ab2, #073b4c);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            opacity: 0.15;
+        }
+
+        .sun {
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #ffd166, #ff9e00);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(255, 209, 102, 0.7);
+            animation: sunGlow 4s infinite alternate;
+        }
+
+        .cloud {
+            position: absolute;
+            top: 20%;
+            right: 20%;
+            width: 150px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .cloud:before, .cloud:after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+
+        .cloud:before {
+            width: 70px;
+            height: 70px;
+            top: -30px;
+            left: 20px;
+        }
+
+        .cloud:after {
+            width: 50px;
+            height: 50px;
+            top: -20px;
+            right: 20px;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 3px;
+            height: 15px;
+            background: linear-gradient(to bottom, transparent, #4fc3f7);
+            border-radius: 0 0 5px 5px;
+            animation: rainFall 1.5s linear infinite;
+        }
+
+        @keyframes sunGlow {
+            0% { box-shadow: 0 0 40px rgba(255, 209, 102, 0.7); }
+            100% { box-shadow: 0 0 60px rgba(255, 209, 102, 1); }
+        }
+
+        @keyframes rainFall {
+            0% { transform: translateY(-20px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(100px); opacity: 0; }
         }
 
         .container {
             width: 100%;
-            max-width: 850px;
+            max-width: 900px;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 25px;
             padding: 40px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in;
         }
 
         h1 {
@@ -38,6 +140,7 @@
             letter-spacing: 1px;
             color: #4fc3f7;
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
         }
 
         .card {
@@ -60,12 +163,21 @@
         }
 
         .form-group {
-            margin: 10px 0;
+            margin: 15px 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
-        input[type="text"] {
+        label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #b3e5fc;
+            width: 80%;
+            text-align: left;
+        }
+
+        input[type="number"], select {
             width: 80%;
             padding: 12px 15px;
             border: none;
@@ -75,6 +187,12 @@
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus, select:focus {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
         }
 
         input::placeholder {
@@ -85,8 +203,8 @@
             display: block;
             width: 100%;
             max-width: 350px;
-            margin: 12px auto;
-            padding: 12px;
+            margin: 20px auto;
+            padding: 14px;
             background: linear-gradient(90deg, #00d4ff, #007bff);
             border: none;
             border-radius: 12px;
@@ -95,11 +213,13 @@
             font-size: 1.1rem;
             cursor: pointer;
             transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
         }
 
         .btn:hover {
             transform: scale(1.05);
             background: linear-gradient(90deg, #1ec5ff, #005ecb);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
         }
 
         .weather-grid {
@@ -114,6 +234,11 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .weather-item:hover {
+            transform: scale(1.05);
         }
 
         .icon {
@@ -144,41 +269,104 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            input[type="number"], select {
+                width: 95%;
+            }
+            
+            .sun, .cloud {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="weather-bg">
+        <div class="sun-side"></div>
+        <div class="rain-side"></div>
+        <div class="sun"></div>
+        <div class="cloud"></div>
+        <!-- Raindrops -->
+        <div class="raindrop" style="left: 70%; top: 25%; animation-delay: 0s;"></div>
+        <div class="raindrop" style="left: 75%; top: 30%; animation-delay: 0.2s;"></div>
+        <div class="raindrop" style="left: 80%; top: 35%; animation-delay: 0.4s;"></div>
+        <div class="raindrop" style="left: 85%; top: 40%; animation-delay: 0.6s;"></div>
+        <div class="raindrop" style="left: 90%; top: 45%; animation-delay: 0.8s;"></div>
+    </div>
+    
     <div class="container">
-        <h1>🌧️ Enter Weather Parameters</h1>
+        <h1><i class="fas fa-cloud-sun-rain"></i> Rainfall Prediction</h1>
         <form method="POST">
-            <label>Temperature (°C):</label>
-            <input type="number" step="0.1" name="temperature" required>
+            <div class="form-group">
+                <label for="temperature">Temperature (°C):</label>
+                <input type="number" step="0.1" name="temperature" id="temperature" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="humidity">Relative Humidity (%):</label>
+                <input type="number" step="0.1" name="humidity" id="humidity" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="precipitation">Precipitation (mm):</label>
+                <input type="number" step="0.1" name="precipitation" id="precipitation" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="visibility">Visibility (km):</label>
+                <input type="number" step="0.1" name="visibility" id="visibility" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="weather_type">Weather Type:</label>
+                <select name="weather_type" id="weather_type" required style="color: black;">
+                    <option value="Clear">Clear</option>
+                    <option value="Rain">Rain</option>
+                    <option value="Drizzle">Drizzle</option>
+                    <option value="Thunderstorm">Thunderstorm</option>
+                    <option value="Mist">Mist</option>
+                    <option value="Fog">Fog</option>
+                    <option value="Smoke Or Haze">Smoke Or Haze</option>
+                    <option value="Cloudy">Cloudy</option>
+                    <option value="Light Rain">Light Rain</option>
+                    <option value="Heavy Rain">Heavy Rain</option>
+                    <option value="Light Drizzle">Light Drizzle</option>
+                </select>
+            </div>
 
-            <label>Relative Humidity (%):</label>
-            <input type="number" step="0.1" name="humidity" required>
-
-            <label>Precipitation (mm):</label>
-            <input type="number" step="0.1" name="precipitation" required>
-
-            <label>Visibility (km):</label>
-            <input type="number" step="0.1" name="visibility" required>
-
-            <label>Weather Type:</label>
-<select name="weather_type" required>
-    <option value="Clear">Clear</option>
-    <option value="Rain">Rain</option>
-    <option value="Drizzle">Drizzle</option>
-    <option value="Thunderstorm">Thunderstorm</option>
-    <option value="Mist">Mist</option>
-    <option value="Fog">Fog</option>
-    <option value="Smoke Or Haze">Smoke Or Haze</option>
-    <option value="Cloudy">Cloudy</option>
-    <option value="Light Rain">Light Rain</option>
-    <option value="Heavy Rain">Heavy Rain</option>
-    <option value="Light Drizzle">Light Drizzle</option>
-</select>
-
-            <button type="submit" class="btn">Predict</button>
+            <button type="submit" class="btn">
+                <i class="fas fa-bolt"></i> Predict Rainfall
+            </button>
         </form>
     </div>
+
+    <script>
+        // Create additional raindrops dynamically
+        function createRaindrops() {
+            const rainContainer = document.querySelector('.weather-bg');
+            for (let i = 0; i < 15; i++) {
+                const raindrop = document.createElement('div');
+                raindrop.className = 'raindrop';
+                raindrop.style.left = `${Math.random() * 30 + 70}%`;
+                raindrop.style.top = `${Math.random() * 30}%`;
+                raindrop.style.animationDelay = `${Math.random() * 2}s`;
+                rainContainer.appendChild(raindrop);
+            }
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('load', createRaindrops);
+    </script>
 </body>
 </html>

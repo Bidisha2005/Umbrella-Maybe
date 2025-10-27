@@ -15,7 +15,11 @@
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/)
 An AI-powered web application that predicts rainfall using meteorological data and a trained Machine Learning model.
 
+<<<<<<< HEAD
 <img width="2833" height="1523" alt="image" src="https://github.com/Bidisha2005/Umbrella-Maybe/blob/main/static/home.png?raw=true" />
+=======
+https://github.com/Bidisha2005/Umbrella-Maybe/blob/main/static/home.png?raw=true
+>>>>>>> ae4d97c63dc032a47d288edfb03ba0859b94c561
 
 ## ✨ Features
 
@@ -98,3 +102,4 @@ Computer Science Student | ML & Web Developer | Passionate about AI-powered appl
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
+

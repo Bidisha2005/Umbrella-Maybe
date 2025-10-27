@@ -62,28 +62,19 @@ From fetching your live geolocation weather to generating rainfall predictions w
 | **Version Control** | Git & GitHub |
 
 ---
-##
----
-
-## ⚙️ Installation & Setup
+### 🛠️ Installation
 ```bash
-1️⃣ Clone the repository
-git clone https://github.com/<your-username>/rainfall-predictor.git
+git clone https://github.com/yourusername/rainfall-predictor.git
 cd rainfall-predictor
-
-2️⃣ Install dependencies
 pip install -r requirements.txt
-
-3️⃣ Set up environment variables
-Create a .env file in the root directory:
-
-4️⃣ Run the Flask app
 python app.py
 
-5️⃣ Open in your browser
-http://127.0.0.1:5000
+
 
 ---
+Now open in your browser at http://127.0.0.1:5000
+---
+
 🔮 Model Details
 
 The Machine Learning model was trained on meteorological datasets using:
@@ -117,5 +108,6 @@ Computer Science Student | ML & Web Developer | Passionate about AI-powered appl
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
+
 
 

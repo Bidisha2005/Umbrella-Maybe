@@ -90,7 +90,3 @@ Computer Science Student | ML & Web Developer | Passionate about AI-powered appl
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
-
-
-
-=======

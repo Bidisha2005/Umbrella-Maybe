@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🌧️ Rainfall Predictor - ML-Powered Weather Forecast
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
@@ -61,21 +61,20 @@ Now open in your browser at http://127.0.0.1:5000
 🔮 Model Details
 
 The Machine Learning model was trained on meteorological datasets using:
--Features: Humidity, Temperature, Pressure,Visibility,Weather Type
--Label: Rainfall (binary classification)
--Algorithms: Random Forest, XGBoost
--Best Accuracy: ~92%
--Metrics Used: Accuracy, F1 Score, ROC Curve
-Model stored as rainfall_model.pkl and integrated into Flask backend.
+- **Features**: Humidity, Temperature, Pressure, Visibility, Weather Type
+- **Label**: Rainfall (binary classification)
+- **Algorithms**: Random Forest, XGBoost
+- **Best Accuracy**: $\sim 92\%$
+- **Metrics Used**: Accuracy, $F1$ Score, ROC Curve
 
 ---
 💡 Future Enhancements
--🌡️ Add more predictive parameters (wind speed, cloud cover)
--📱 Convert to Progressive Web App (PWA)
--🌐 Add multilingual weather chatbot support
--🔔 Enable weather alerts via email/SMS
--🌈 Integrate AI-based weather visualizations using Gemini Vision
 
+- 🌡️ Add more predictive parameters (wind speed, cloud cover)
+- 📱 Convert to Progressive Web App (PWA)
+- 🌐 Add multilingual weather chatbot support
+- 🔔 Enable weather alerts via email/SMS
+- 🌈 Integrate AI-based weather visualizations using Gemini Vision
 ---
 🧑‍💻 Developer
 
@@ -95,5 +94,3 @@ Your support motivates me to keep building awesome AI-powered web apps 🚀
 
 
 =======
->>>>>>> 0848ca464768d2e42650db8728738f3d02ea6081
-

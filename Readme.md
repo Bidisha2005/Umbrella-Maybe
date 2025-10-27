@@ -66,7 +66,7 @@ From fetching your live geolocation weather to generating rainfall predictions w
 ---
 
 ## ⚙️ Installation & Setup
-
+```bash
 1️⃣ Clone the repository
 git clone https://github.com/<your-username>/rainfall-predictor.git
 cd rainfall-predictor
@@ -117,4 +117,5 @@ Computer Science Student | ML & Web Developer | Passionate about AI-powered appl
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
+
 

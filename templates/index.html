@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☁️ Rainfall Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #4fc3f7;
+            --secondary-color: #b3e5fc;
+            --bg-color: #0f2027;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --text-color: #fff;
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            --gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            --btn-gradient: linear-gradient(90deg, #00d4ff, #007bff);
+        }
+
+        .light-mode {
+            --primary-color: #0277bd;
+            --secondary-color: #01579b;
+            --bg-color: #f5f5f5;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-color: #333;
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #e3f2fd, #bbdefb, #90caf9);
+            --btn-gradient: linear-gradient(90deg, #0288d1, #01579b);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background: var(--gradient);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .light-mode .navbar {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--primary-color);
+        }
+
+        .light-mode .nav-links a:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content - Full Width Sections */
+        .section {
+            width: 100%;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-section {
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .content-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .light-mode .card {
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        h3, h2 {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .light-mode h3, .light-mode h2 {
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .light-mode input[type="text"] {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+
+        input::placeholder {
+            color: #cfd8dc;
+        }
+
+        .light-mode input::placeholder {
+            color: #666;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            margin: 15px auto;
+            padding: 12px;
+            background: var(--btn-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #1ec5ff, #005ecb);
+        }
+
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .weather-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .light-mode .weather-item {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .icon {
+            display: block;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .label {
+            font-weight: 500;
+            display: block;
+            color: var(--secondary-color);
+        }
+
+        .light-mode .label {
+            color: var(--secondary-color);
+        }
+
+        .value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .coordinates {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #90caf9;
+        }
+
+        .light-mode .coordinates {
+            color: #0277bd;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .developer-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .light-mode .developer-info {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .developer-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .developer-details h4 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .light-mode footer {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .footer-links li {
+            margin: 0 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Gemini Chat Bot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .chatbot-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light-mode .chatbot-window {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chatbot-header h4 {
+            margin: 0;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .close-chatbot {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background: rgba(102, 126, 234, 0.2);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: rgba(76, 175, 80, 0.2);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .light-mode .chatbot-input {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .light-mode .chatbot-input input {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .chatbot-input button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.05);
+        }
+
+        .suggested-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .light-mode .suggested-questions {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        /* Loading indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    background: rgba(102, 126, 234, 0.7);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    animation: typing 1s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+        .suggestion {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 15px;
+            padding: 8px 12px;
+            color: var(--text-color);
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+
+        .light-mode .suggestion {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .suggestion:hover {
+            background: rgba(102, 126, 234, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+            }
+
+            .light-mode .nav-links {
+                background: rgba(255, 255, 255, 0.95);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .developer-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .developer-img {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .section {
+                padding: 40px 15px;
+            }
+
+            .chatbot-window {
+                width: 300px;
+                height: 450px;
+                right: -10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chatbot-window {
+                width: 280px;
+                height: 400px;
+                right: -20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-cloud-showers-heavy"></i>
+                <span>Rainfall Predictor</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#weather">Weather</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#predict">Predict</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="section hero-section" id="home">
+        <h1>🌦 Umbrella Maybe?</h1>
+        <p class="subtitle">Advanced rainfall prediction using machine learning and real-time weather data</p>
+        <a href="#weather" class="btn">Check Current Weather</a>
+    </section>
+
+    <!-- Weather Data Section -->
+    <section class="section content-section" id="weather">
+        <div class="card">
+            <h2>📍 Current Weather in {{ weather.location_name }}</h2>
+            <div class="weather-grid">
+                <div class="weather-item">
+                    <span class="icon">🌡️</span>
+                    <span class="label">Temperature</span>
+                    <span class="value">{{ weather.temperature }}°C</span>
+                </div>
+                <div class="weather-item">
+                    <span class="icon">💨</span>
+                    <span class="label">Wind Speed</span>
+                    <span class="value">{{ weather.windspeed }} km/h</span>
+                </div>
+                <div class="weather-item">
+                    <span class="icon">💧</span>
+                    <span class="label">Humidity</span>
+                    <span class="value">{{ weather.humidity }}%</span>
+                </div>
+                <div class="weather-item">
+                    <span class="icon">🌧️</span>
+                    <span class="label">Precipitation</span>
+                    <span class="value">{{ weather.precipitation }} mm</span>
+                </div>
+            </div>
+            <p class="coordinates">Coordinates: {{ weather.latitude }}, {{ weather.longitude }}</p>
+            
+            <!-- Prediction Button -->
+            <a href="{{ url_for('predict') }}" class="btn" id="predict">🔮 Predict Rainfall</a>
+        </div>
+    </section>
+
+    <!-- Location Input Section -->
+    <section class="section content-section" id="location">
+        <div class="card">
+            <h3>📍 Update Your Location</h3>
+            <form id="locationForm">
+                <div class="form-group">
+                    <input type="text" id="latitude" placeholder="Latitude (e.g., 13.0827)" value="{{ weather.latitude }}">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="longitude" placeholder="Longitude (e.g., 80.2707)" value="{{ weather.longitude }}">
+                </div>
+                <button type="button" class="btn" onclick="updateLocation()">Update Location</button>
+            </form>
+            <button type="button" class="btn" onclick="getCurrentLocation()" style="background: linear-gradient(90deg, #00c853, #00e676); margin-top: 10px;">
+                📍 Use My Current Location
+            </button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section content-section" id="about">
+        
+            <h2>About This Project</h2>
+            <div class="about-content">
+                <p>This Rainfall Predictor is an advanced weather forecasting tool that uses machine learning algorithms to predict rainfall patterns and potential rainfall events. It analyzes real-time weather data including temperature, humidity, wind speed, and atmospheric pressure to provide accurate rainfall predictions.</p>
+                
+                <div class="developer-info">
+                    <div class="developer-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="developer-details">
+                        <h4>Bidisha Kundu</h4>
+                        <p>Developer & Data Scientist</p>
+                        <p>Passionate about creating solutions that combine technology and environmental science.</p>
+                    </div>
+                </div>
+            </div>
+        
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>Rainfall Predictor</h3>
+            <p>Your reliable companion for weather forecasting</p>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#weather">Weather</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#predict">Predict</a></li>
+            </ul>
+            <div class="copyright">
+                <p>&copy; 2025 Rainfall Predictor. Developed by Bidisha Kundu. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Gemini Chat Bot -->
+    <div class="chatbot-container">
+        <div class="chatbot-icon" id="chatbotIcon">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h4>Weather Assistant</h4>
+                <button class="close-chatbot" id="closeChatbot">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hello! I'm your weather assistant. I can help answer questions about weather, rainfall prediction, and climate information. How can I assist you today?
+                </div>
+            </div>
+            <div class="suggested-questions">
+                <button class="suggestion" onclick="askQuestion('What is the current temperature?')">What is the current temperature?</button>
+                <button class="suggestion" onclick="askQuestion('Will it rain today?')">Will it rain today?</button>
+                <button class="suggestion" onclick="askQuestion('How does humidity affect rainfall?')">How does humidity affect rainfall?</button>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Ask about weather..." onkeypress="handleChatInput(event)">
+                <button id="sendMessage">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.body.classList.toggle('light-mode', currentTheme === 'light');
+        updateThemeIcon();
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const theme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+            updateThemeIcon();
+        });
+        
+        function updateThemeIcon() {
+            if (document.body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Get user's current location
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        window.location.href = `/?lat=${lat}&lon=${lon}`;
+                    },
+                    function(error) {
+                        alert("Unable to get your location. Please enter manually.");
+                    }
+                );
+            } else {
+                alert("Geolocation not supported by this browser.");
+            }
+        }
+
+        // Manual update
+        function updateLocation() {
+            const lat = document.getElementById('latitude').value;
+            const lon = document.getElementById('longitude').value;
+            if (lat && lon) {
+                window.location.href = `/?lat=${lat}&lon=${lon}`;
+            } else {
+                alert("Please enter both latitude and longitude.");
+            }
+        }
+
+        // Auto-detect location on first load
+        window.onload = function() {
+            const currentLat = "{{ weather.latitude }}";
+            const currentLon = "{{ weather.longitude }}";
+            if (currentLat == "13.0827" && currentLon == "80.2707") {
+                getCurrentLocation();
+            }
+        };
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+// Gemini Chat Bot Functionality
+const chatbotIcon = document.getElementById('chatbotIcon');
+const chatbotWindow = document.getElementById('chatbotWindow');
+const closeChatbot = document.getElementById('closeChatbot');
+const chatbotMessages = document.getElementById('chatbotMessages');
+const chatbotInput = document.getElementById('chatbotInput');
+const sendMessage = document.getElementById('sendMessage');
+
+// Open chatbot
+chatbotIcon.addEventListener('click', () => {
+    chatbotWindow.style.display = 'flex';
+});
+
+// Close chatbot
+closeChatbot.addEventListener('click', () => {
+    chatbotWindow.style.display = 'none';
+});
+
+// Send message on button click
+sendMessage.addEventListener('click', sendChatMessage);
+
+// Send message on Enter key
+function handleChatInput(event) {
+    if (event.key === 'Enter') {
+        sendChatMessage();
+    }
+}
+
+// Ask question from suggested questions
+function askQuestion(question) {
+    chatbotInput.value = question;
+    sendChatMessage();
+}
+
+// Send chat message
+async function sendChatMessage() {
+    const message = chatbotInput.value.trim();
+    if (message === '') return;
+
+    // Add user message
+    addMessage(message, 'user');
+    chatbotInput.value = '';
+
+    // Show typing indicator
+    showTypingIndicator();
+
+    try {
+        // Get current weather data for context
+        const currentTemp = "{{ weather.temperature }}";
+        const currentHumidity = "{{ weather.humidity }}";
+        const currentPrecipitation = "{{ weather.precipitation }}";
+        const currentWindspeed = "{{ weather.windspeed }}";
+        const currentLocation = "{{ weather.location_name }}";
+
+        // Call our backend API
+        const response = await fetch('/api/chatbot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+                current_temp: currentTemp,
+                current_humidity: currentHumidity,
+                current_precipitation: currentPrecipitation,
+                current_windspeed: currentWindspeed,
+                current_location: currentLocation
+            })
+        });
+
+        const data = await response.json();
+        
+        // Remove typing indicator
+        removeTypingIndicator();
+        
+        if (response.ok) {
+            addMessage(data.response, 'bot');
+        } else {
+            throw new Error(data.error || 'Failed to get response');
+        }
+    } catch (error) {
+        // Remove typing indicator
+        removeTypingIndicator();
+        console.error('Chatbot error:', error);
+        // Use fallback responses
+        const fallbackResponse = generateFallbackResponse(message);
+        addMessage(fallbackResponse, 'bot');
+    }
+}
+
+// Add message to chat
+function addMessage(text, sender) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+    messageDiv.textContent = text;
+    chatbotMessages.appendChild(messageDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+// Show typing indicator
+function showTypingIndicator() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'typing-indicator';
+    typingDiv.id = 'typingIndicator';
+    typingDiv.innerHTML = `
+        <span></span>
+        <span></span>
+        <span></span>
+    `;
+    chatbotMessages.appendChild(typingDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+// Remove typing indicator
+function removeTypingIndicator() {
+    const typingIndicator = document.getElementById('typingIndicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+// Fallback response generator (used if API fails)
+function generateFallbackResponse(userMessage) {
+    const lowerMessage = userMessage.toLowerCase();
+    const currentTemp = "{{ weather.temperature }}";
+    const currentHumidity = "{{ weather.humidity }}";
+    const currentPrecipitation = "{{ weather.precipitation }}";
+    const currentWindspeed = "{{ weather.windspeed }}";
+
+    // Weather condition responses
+    if (lowerMessage.includes('temperature') || lowerMessage.includes('temp')) {
+        return `The current temperature is ${currentTemp}°C. This is based on real-time weather data for your location.`;
+    }
+    else if (lowerMessage.includes('humidity')) {
+        return `The current humidity is ${currentHumidity}%. Humidity affects how comfortable the temperature feels and can influence rainfall probability.`;
+    }
+    else if (lowerMessage.includes('rain') || lowerMessage.includes('precipitation')) {
+        return `Current precipitation is ${currentPrecipitation} mm. Our rainfall prediction model analyzes multiple factors including humidity, temperature, and atmospheric pressure to forecast rain.`;
+    }
+    else if (lowerMessage.includes('wind')) {
+        return `The current wind speed is ${currentWindspeed} km/h. Wind patterns are important for weather prediction and can indicate approaching weather systems.`;
+    }
+    else if (lowerMessage.includes('predict') || lowerMessage.includes('forecast')) {
+        return "Our rainfall prediction uses machine learning to analyze weather patterns. Click the 'Predict Rainfall' button for a detailed analysis based on current conditions.";
+    }
+    else if (lowerMessage.includes('how') && lowerMessage.includes('work')) {
+        return "This system uses machine learning algorithms trained on historical weather data to predict rainfall probability based on current temperature, humidity, wind speed, and other atmospheric conditions.";
+    }
+    else if (lowerMessage.includes('location') || lowerMessage.includes('where')) {
+        return "Your current location is set to coordinates: {{ weather.latitude }}, {{ weather.longitude }}. You can update your location in the 'Location' section above.";
+    }
+    else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+        return "Hello! I'm your weather assistant. I can help answer questions about current weather conditions, rainfall prediction, and how our system works.";
+    }
+    else {
+        return "I specialize in weather-related questions. You can ask me about current temperature, humidity, rainfall prediction, or how our weather forecasting system works. Try clicking the suggested questions above!";
+    }
+} </script>
+    
+</body>
+</html>

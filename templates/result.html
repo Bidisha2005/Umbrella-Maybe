@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rainfall Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="{% if result == 'Yes' %}yes-cloudburst{% else %}no-cloudburst{% endif %}">
+    
+    <!-- Rain Animation for Yes Rainfall -->
+    {% if result == 'Yes' %}
+    <div class="rain">
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+        <div class="raindrop"></div>
+    </div>
+    <div class="rain-effect"></div>
+    {% endif %}
+    
+    <div class="container">
+        <div class="card">
+            <h1>🌩️ Rainfall Prediction</h1>
+            
+            <!-- Prediction Result -->
+            {% if result == 'Yes' %}
+    <div class="prediction-yes">🌧️ Umbrella? YES!</div>
+    <p><strong>"Better grab that brolly - it's officially an Umbrella Yes day! ☔"</strong></p>
+    <p class="funny-subtext">The skies say: Stay dry or get drenched! Your choice.</p>
+{% else %}
+    <div class="prediction-no">☀️ Umbrella? NO!</div>
+    <p><strong>"Leave the umbrella at home - it's an Umbrella No kind of day! 🎉"</strong></p>
+    <p class="funny-subtext">Perfect weather for outdoor adventures and good hair days!</p>
+{% endif %}
+            
+            <!-- Confidence Level 
+            {% if confidence %}
+                <div class="confidence">
+                    Confidence: <span class="confidence-{{ confidence_level.lower() }}">{{ (confidence * 100)|round(1) }}% ({{ confidence_level }})</span>
+                </div>
+            {% endif %}-->
+            
+            <!-- Navigation Buttons -->
+            <div style="margin-top: 25px;">
+                <a href="{{ url_for('home') }}" class="btn">🏠 Home</a>
+                <a href="{{ url_for('predict') }}" class="btn">🔮 New Prediction</a>
+            </div>
+            
+            <!-- Error Message (if any) -->
+            {% if result and 'Error' in result %}
+                <div style="color: #e74c3c; margin-top: 15px; padding: 10px; background: rgba(231, 76, 60, 0.1); border-radius: 6px; font-size: 0.9em;">
+                    {{ result }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Visualization Dashboard Section -->
+<h2 style="margin-top: 40px; text-align:center; color:white;">🌦️ Weather Dashboard</h2>
+
+<div class="dashboard-container">
+
+    <!-- Radar Chart -->
+    <div class="chart-card">
+        <h3>Weather Input Visualization</h3>
+        <canvas id="weatherChart" width="350" height="250"></canvas>
+    </div>
+
+    <!-- Confidence Gauge -->
+    <div class="chart-card">
+        <h3>Prediction Confidence</h3>
+        <canvas id="confidenceGauge" width="350" height="250"></canvas>
+    </div>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        justify-content: center;
+        align-items: start;
+        padding: 30px;
+        width: 90%;
+        margin: auto;
+    }
+
+    .chart-card {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .chart-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 30px rgba(255, 255, 255, 0.2);
+    }
+
+    .chart-card h3 {
+        color: white;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+        letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    // Get input data from Flask
+    const inputData = {{ input_data | tojson }};
+
+    const labels = Object.keys(inputData);
+    const values = Object.values(inputData);
+
+    // Radar Chart
+    const ctxRadar = document.getElementById('weatherChart').getContext('2d');
+    new Chart(ctxRadar, {
+        type: 'radar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Weather Conditions',
+                data: values,
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(41, 128, 185, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    pointLabels: { color: 'white', font: { size: 14, weight: 'bold' } },
+                    ticks: { color: 'white', backdropColor: 'transparent', font: { size: 12 } }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                title: { display: false },
+                tooltip: {
+                    titleColor: 'white',
+                    bodyColor: 'white',
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    borderColor: 'rgba(255, 255, 255, 0.3)',
+                    borderWidth: 1
+                }
+            }
+        }
+    });
+
+    // Confidence Gauge
+    const confidenceValue = {{ confidence|default(0.92) }};
+    const ctxGauge = document.getElementById('confidenceGauge').getContext('2d');
+    new Chart(ctxGauge, {
+        type: 'doughnut',
+        data: {
+            labels: ['Confidence', 'Remaining'],
+            datasets: [{
+                data: [confidenceValue * 100, 100 - (confidenceValue * 100)],
+                backgroundColor: ['#4CAF50', 'rgba(255,255,255,0.1)'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '70%',
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false },
+                title: {
+                    display: true,
+                    text: (confidenceValue * 100).toFixed(1) + '% Confidence',
+                    color: 'white',
+                    font: { size: 18, weight: 'bold' }
+                }
+            }
+        }
+    });
+
+</script>
+
+
+</body>
+</html>

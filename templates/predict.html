@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rainfall Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.6rem;
+            letter-spacing: 1px;
+            color: #4fc3f7;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        h3, h2 {
+            text-align: center;
+            color: #b3e5fc;
+        }
+
+        .form-group {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-align: center;
+        }
+
+        input::placeholder {
+            color: #cfd8dc;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            margin: 12px auto;
+            padding: 12px;
+            background: linear-gradient(90deg, #00d4ff, #007bff);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #1ec5ff, #005ecb);
+        }
+
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .weather-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .icon {
+            display: block;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .label {
+            font-weight: 500;
+            display: block;
+            color: #b3e5fc;
+        }
+
+        .value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .coordinates {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #90caf9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌧️ Enter Weather Parameters</h1>
+        <form method="POST">
+            <label>Temperature (°C):</label>
+            <input type="number" step="0.1" name="temperature" required>
+
+            <label>Relative Humidity (%):</label>
+            <input type="number" step="0.1" name="humidity" required>
+
+            <label>Precipitation (mm):</label>
+            <input type="number" step="0.1" name="precipitation" required>
+
+            <label>Visibility (km):</label>
+            <input type="number" step="0.1" name="visibility" required>
+
+            <label>Weather Type:</label>
+<select name="weather_type" required>
+    <option value="Clear">Clear</option>
+    <option value="Rain">Rain</option>
+    <option value="Drizzle">Drizzle</option>
+    <option value="Thunderstorm">Thunderstorm</option>
+    <option value="Mist">Mist</option>
+    <option value="Fog">Fog</option>
+    <option value="Smoke Or Haze">Smoke Or Haze</option>
+    <option value="Cloudy">Cloudy</option>
+    <option value="Light Rain">Light Rain</option>
+    <option value="Heavy Rain">Heavy Rain</option>
+    <option value="Light Drizzle">Light Drizzle</option>
+</select>
+
+            <button type="submit" class="btn">Predict</button>
+        </form>
+    </div>
+</body>
+</html>

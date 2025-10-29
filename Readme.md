@@ -94,11 +94,10 @@ The Machine Learning model was trained on meteorological datasets using:
 Bidisha Kundu — Computer Science Student | ML & Web Developer | Passionate about AI-powered Applications
 
 📧 Email: kbidisha.2005@gmail.com
-
 💼 LinkedIn: linkedin.com/in/bidisha-kundu-41706428b
 
-🔹 Project solely developed and maintained by Bidisha Kundu.
-Minor edits or suggestions from others do not represent shared authorship.
+🔹 Project Development
+This is a personal project independently developed and maintained by Bidisha Kundu. I am grateful for all the helpful feedback and suggestions, which are greatly appreciated.
 
 ---
 
@@ -106,6 +105,7 @@ Minor edits or suggestions from others do not represent shared authorship.
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
+
 
 
 

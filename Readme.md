@@ -88,13 +88,17 @@ The Machine Learning model was trained on meteorological datasets using:
 - 🔔 Enable weather alerts via email/SMS
 - 🌈 Integrate AI-based weather visualizations using Gemini Vision
 ---
+
 🧑‍💻 Developer
 
-👤 Bidisha Kundu
-Computer Science Student | ML & Web Developer | Passionate about AI-powered applications
+Bidisha Kundu — Computer Science Student | ML & Web Developer | Passionate about AI-powered Applications
 
-📧 Email:kbidisha.2005@gmail.com
-💼 LinkedIn:https://www.linkedin.com/in/bidisha-kundu-41706428b/
+📧 Email: kbidisha.2005@gmail.com
+
+💼 LinkedIn: linkedin.com/in/bidisha-kundu-41706428b
+
+🔹 Project solely developed and maintained by Bidisha Kundu.
+Minor edits or suggestions from others do not represent shared authorship.
 
 ---
 
@@ -102,5 +106,6 @@ Computer Science Student | ML & Web Developer | Passionate about AI-powered appl
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
+
 
 

@@ -96,8 +96,7 @@ Bidisha Kundu — Computer Science Student | ML & Web Developer | Passionate abo
 📧 Email: kbidisha.2005@gmail.com
 💼 LinkedIn: linkedin.com/in/bidisha-kundu-41706428b
 
-🔹 Project Development
-This is a personal project independently developed and maintained by Bidisha Kundu. I am grateful for all the helpful feedback and suggestions, which are greatly appreciated.
+🔹 This is a personal project independently developed and maintained by Bidisha Kundu. I am grateful for all the helpful feedback and suggestions, which are greatly appreciated.
 
 ---
 
@@ -105,6 +104,7 @@ This is a personal project independently developed and maintained by Bidisha Kun
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
+
 
 
 

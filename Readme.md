@@ -61,7 +61,7 @@ Before you begin, ensure you have the following installed:
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/rainfall-predictor.git
+git clone https://github.com/Bidisha2005/Umbrella-Maybe
 cd rainfall-predictor
 pip install -r requirements.txt
 python app.py
@@ -102,4 +102,5 @@ Computer Science Student | ML & Web Developer | Passionate about AI-powered appl
 
 If you liked this project, consider giving it a ⭐ on GitHub — it helps others discover it too!
 Your support motivates me to keep building awesome AI-powered web apps 🚀
+
 
